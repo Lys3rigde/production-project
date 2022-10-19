@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 /*
  * For a detailed explanation regarding each configuration property and type check, visit:
  * https://jestjs.io/docs/configuration
@@ -85,7 +84,6 @@ export default {
 
   // An array of file extensions your modules use
 
-  // eslint-disable-next-line max-len
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
   // moduleNameMapper: {},
 
@@ -135,7 +133,6 @@ export default {
   // A list of paths to modules that run some code to configure or set up the testing framework before each test
   // setupFilesAfterEnv: [],
 
-  // eslint-disable-next-line max-len
   // The number of seconds after which a test is considered as slow and reported as such in the results.
   // slowTestThreshold: 5,
 
