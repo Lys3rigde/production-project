@@ -10,13 +10,6 @@ import { buildDevServer } from './buildDevServer';
 export function buildWebpackConfig(options: BuildOptions): webpack.Configuration {
   const { paths, mode, isDev } = options;
 
-  const plugins = buildPlugins(options);
-
-  if (isDev) {
-    // plugins.push(new ReactRefreshWebpackPlugin());
-    plugins.push(new webpack.HotModuleReplacementPlugin());
-  }
-
   return {
     mode,
     entry: paths.entry,
