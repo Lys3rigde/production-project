@@ -5,7 +5,7 @@ import { buildLoaders } from './buildLoaders';
 import { buildResolvers } from './buildResolvers';
 import { buildDevServer } from './buildDevServer';
 
-const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
+// const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 export function buildWebpackConfig(options: BuildOptions): webpack.Configuration {
   const { paths, mode, isDev } = options;
@@ -13,7 +13,7 @@ export function buildWebpackConfig(options: BuildOptions): webpack.Configuration
   const plugins = buildPlugins(options);
 
   if (isDev) {
-    plugins.push(new ReactRefreshWebpackPlugin());
+    // plugins.push(new ReactRefreshWebpackPlugin());
     plugins.push(new webpack.HotModuleReplacementPlugin());
   }
 
