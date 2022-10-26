@@ -3,7 +3,7 @@ import { ComponentStory, ComponentMeta, addDecorator } from '@storybook/react';
 
 import { ThemeDecorator } from 'shared/config/storybook/ThemeDecorator/ThemeDecorator';
 import { Theme } from 'app/providers/ThemeProvider';
-import Button, { ThemeButton } from './Button';
+import Button, { ButtonSize, ButtonTheme } from './Button';
 
 export default {
   title: 'shared/Button',
@@ -22,19 +22,68 @@ Primary.args = {
 
 export const Clear = Template.bind({});
 Clear.args = {
-  theme: ThemeButton.CLEAR,
+  theme: ButtonTheme.CLEAR,
   children: 'Text',
 };
 
 export const OutlineDark = Template.bind({});
 OutlineDark.args = {
-  theme: ThemeButton.OUTLINE,
+  theme: ButtonTheme.OUTLINE,
   children: 'Text',
 };
 OutlineDark.decorators = [ThemeDecorator(Theme.DARK)];
 
-export const OutlineLight = Template.bind({});
-OutlineLight.args = {
-  theme: ThemeButton.OUTLINE,
+export const Outline = Template.bind({});
+Outline.args = {
+  theme: ButtonTheme.OUTLINE,
   children: 'Text',
+};
+
+export const OutlineSizeL = Template.bind({});
+OutlineSizeL.args = {
+  theme: ButtonTheme.OUTLINE,
+  children: 'Text',
+  size: ButtonSize.L,
+};
+
+export const OutlineSizeXL = Template.bind({});
+OutlineSizeXL.args = {
+  theme: ButtonTheme.OUTLINE,
+  children: 'Text',
+  size: ButtonSize.XL,
+};
+
+export const Background = Template.bind({});
+Background.args = {
+  theme: ButtonTheme.BACKGROUND,
+  children: 'Text',
+};
+
+export const BackgroundInverted = Template.bind({});
+BackgroundInverted.args = {
+  theme: ButtonTheme.BACKGROUND_INVERTED,
+  children: 'Text',
+};
+
+export const Square = Template.bind({});
+Square.args = {
+  theme: ButtonTheme.BACKGROUND_INVERTED,
+  square: true,
+  children: '>',
+};
+
+export const SquareSizeL = Template.bind({});
+SquareSizeL.args = {
+  theme: ButtonTheme.BACKGROUND_INVERTED,
+  square: true,
+  children: '>',
+  size: ButtonSize.L,
+};
+
+export const SquareSizeXL = Template.bind({});
+SquareSizeXL.args = {
+  theme: ButtonTheme.BACKGROUND_INVERTED,
+  square: true,
+  children: '>',
+  size: ButtonSize.XL,
 };
