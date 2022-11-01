@@ -3,7 +3,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { LoginForm } from './LoginForm';
 
 export default {
-  title: 'features/Input',
+  title: 'features/LoginForm',
   component: LoginForm,
   argTypes: {
     backgroundColor: { control: 'color' },
