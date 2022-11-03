@@ -39,7 +39,7 @@
 }
 
 .square.size_m {
-  width: var(--font-line-m);
+  width: var(--font-li ne-m);
   height: var(--font-line-m);
   font: var(--font-m);
 }
@@ -66,4 +66,9 @@
 
 .size_xl {
   font: var(--font-xl);
+}
+
+.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }

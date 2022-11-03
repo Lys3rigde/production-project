@@ -8,5 +8,8 @@
   "Код языка": "EN",
   "Войти": "Login",
   "Введите логин": "Login",
-  "Введите пароль": "Password"
+  "Введите пароль": "Password",
+  "Авторизация": "Authorization",
+  "Вы ввели неверный логин или пароль": "Incorrect username or password",
+  "Выйти": "Logout"
 }

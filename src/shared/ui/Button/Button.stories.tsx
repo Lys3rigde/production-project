@@ -26,6 +26,12 @@ Clear.args = {
   children: 'Text',
 };
 
+export const PrimaryDisabled = Template.bind({});
+PrimaryDisabled.args = {
+  children: 'Text',
+  disabled: true,
+};
+
 export const ClearInverted = Template.bind({});
 ClearInverted.args = {
   theme: ButtonTheme.CLEAR_INVERTED,
