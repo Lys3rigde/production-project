@@ -7,7 +7,6 @@ import { memo, useCallback } from 'react';
 import { Text, TextTheme } from 'shared/ui/Text/Text';
 import { DynamicModuleLoader, ReducersList } from 'shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
-import { d } from '@pmmmwh/react-refresh-webpack-plugin/types/options';
 import { getLoginUsername } from '../../model/selectors/getLoginUsername/getLoginUsername';
 import { getLoginPassword } from '../../model/selectors/getLoginPassword/getLoginPassword';
 import { getLoginIsLoading } from '../../model/selectors/getLoginIsLoading/getLoginIsLoading';
@@ -33,8 +32,6 @@ const LoginForm = memo(({ className, onSuccess }: LoginFormProps) => {
   const isLoading = useSelector(getLoginIsLoading);
   const error = useSelector(getLoginError);
 
-  const reducerName = 'login';
-
   const handleChangeUsername = useCallback(
     (value: string) => dispatch(loginActions.setUsername(value)),
     [dispatch],
@@ -48,7 +45,7 @@ const LoginForm = memo(({ className, onSuccess }: LoginFormProps) => {
   const handleLoginClick = useCallback(async () => {
     const result = await dispatch(loginByUsername({ username, password }));
     if (result.meta.requestStatus === 'fulfilled') {
-      onSuccess();
+      onSuccess?.();
     }
   }, [onSuccess, dispatch, username, password]);
 
