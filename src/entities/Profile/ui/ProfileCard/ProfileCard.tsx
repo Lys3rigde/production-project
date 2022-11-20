@@ -51,7 +51,7 @@ export const ProfileCard = (props: ProfileCardProps) => {
 
   if (isLoading) {
     return (
-      <div className={classNames(styles.ProfileCard, {}, [className, styles.isLoading])}>
+      <div className={classNames(styles.ProfileCard, {}, [className, styles.loading])}>
         <Loader />
       </div>
     );

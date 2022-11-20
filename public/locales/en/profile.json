@@ -12,5 +12,10 @@
   "Ваше имя пользователя": "Your usename",
   "Введите ссылку на аватар": "Add link to avatar",
   "Аватар": "Avatar",
-  "Укажите валюту": "Укажите валюту"
+  "Укажите валюту": "Choose currency",
+  "Некорректный возраст": "Incorrect age",
+  "Некорректный город": "Incorrect country",
+  "Имя и фамилия обязательны": "First and lastname required",
+  "Нет данных": "No data",
+  "Серверная ошибка": "Server Error"
 }
