@@ -34,6 +34,11 @@
   position: relative;
 }
 
+.readOnly {
+  opacity: 0.75;
+  cursor: default;
+}
+
 @keyframes blink {
   0% {
     opacity: 0;

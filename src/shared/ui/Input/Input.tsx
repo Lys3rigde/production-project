@@ -1,17 +1,18 @@
-import { classNames } from 'shared/lib/classNames/classNames';
+import { classNames, Mods } from 'shared/lib/classNames/classNames';
 import React, {
   InputHTMLAttributes, memo, MutableRefObject, useEffect, useRef, useState,
 } from 'react';
 import styles from './Input.module.scss';
 
-type HTMLInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'value' | 'onChange'>
+type HTMLInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'value' | 'onChange' | 'readOnly'>
 
 interface InputProps extends HTMLInputProps {
   className?: string;
-	value?: string;
+	value?: string | number;
 	onChange?: (value: string) => void;
   placeholder?: string
   autoFocus?: boolean
+  readOnly?: boolean
 }
 
 export const Input = memo((props: InputProps) => {
@@ -22,6 +23,7 @@ export const Input = memo((props: InputProps) => {
     type = 'text',
     placeholder,
     autoFocus,
+    readOnly,
     ...otherProps
   } = props;
 
@@ -50,8 +52,14 @@ export const Input = memo((props: InputProps) => {
     setCaretPosition(event?.target?.selectionStart || 0);
   };
 
+  const isCaretVisible = isFocused && !readOnly;
+
+  const mods: Mods = {
+    [styles.readOnly]: readOnly,
+  };
+
   return (
-    <div className={classNames(styles.InputWrapper, {}, [className])}>
+    <div className={classNames(styles.InputWrapper, mods, [className])}>
       {placeholder && (
         <div className={styles.placeholder}>
           {`${placeholder}>`}
@@ -59,6 +67,7 @@ export const Input = memo((props: InputProps) => {
       )}
       <div className={styles.caretWrapper}>
         <input
+          readOnly={readOnly}
           ref={ref}
           onBlur={handleBlur}
           onFocus={handleFocus}
@@ -69,7 +78,7 @@ export const Input = memo((props: InputProps) => {
           onSelect={handleSelect}
           {...otherProps}
         />
-        {isFocused && (
+        {isCaretVisible && (
           <span
             className={styles.caret}
             style={{ left: `${caretPosition * 9.6}px` }}
