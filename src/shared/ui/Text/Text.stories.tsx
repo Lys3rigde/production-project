@@ -2,7 +2,7 @@ import React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { ThemeDecorator } from 'shared/config/storybook/ThemeDecorator/ThemeDecorator';
 import { Theme } from 'app/providers/ThemeProvider';
-import { Text, TextTheme } from './Text';
+import { Text, TextSize, TextTheme } from './Text';
 
 export default {
   title: 'shared/Text',
@@ -35,13 +35,13 @@ ErrorDark.args = {
 };
 ErrorDark.decorators = [ThemeDecorator(Theme.DARK)];
 
-export const onlyTitle = Template.bind({});
-onlyTitle.args = {
+export const OnlyTitle = Template.bind({});
+OnlyTitle.args = {
   title: 'title lorem ipsum',
 };
 
-export const onlyText = Template.bind({});
-onlyText.args = {
+export const OnlyText = Template.bind({});
+OnlyText.args = {
   text: 'lorem ipsum lorem ipsum lorem',
 };
 
@@ -52,14 +52,28 @@ PrimaryDark.args = {
 };
 PrimaryDark.decorators = [ThemeDecorator(Theme.DARK)];
 
-export const onlyTitleDark = Template.bind({});
-onlyTitleDark.args = {
+export const OnlyTitleDark = Template.bind({});
+OnlyTitleDark.args = {
   title: 'title lorem ipsum',
 };
-onlyTitleDark.decorators = [ThemeDecorator(Theme.DARK)];
+OnlyTitleDark.decorators = [ThemeDecorator(Theme.DARK)];
 
-export const onlyTextDark = Template.bind({});
-onlyTextDark.args = {
+export const OnlyTextDark = Template.bind({});
+OnlyTextDark.args = {
   text: 'lorem ipsum lorem ipsum lorem',
 };
-onlyTextDark.decorators = [ThemeDecorator(Theme.DARK)];
+OnlyTextDark.decorators = [ThemeDecorator(Theme.DARK)];
+
+export const SizeL = Template.bind({});
+SizeL.args = {
+  title: 'lorem ipsum lorem ipsum lorem',
+  text: 'lorem ipsum lorem ipsum lorem',
+  size: TextSize.L,
+};
+
+export const SizeS = Template.bind({});
+SizeS.args = {
+  title: 'lorem ipsum lorem ipsum lorem',
+  text: 'lorem ipsum lorem ipsum lorem',
+  size: TextSize.S,
+};

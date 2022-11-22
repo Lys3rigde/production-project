@@ -13,5 +13,6 @@
   "Вы ввели неверный логин или пароль": "Incorrect username or password",
   "Выйти": "Logout",
   "PROFILE PAGE": "PROFILE PAGE",
-  "Укажите страну": "Choose country"
+  "Укажите страну": "Choose country",
+  "Произошла ошибка при загрузке статьи": "Произошла ошибка при загрузке статьи"
 }

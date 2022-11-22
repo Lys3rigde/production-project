@@ -1,0 +1,15 @@
+.ArticleTextBlockComponent {
+  min-height: 100%;
+}
+
+.title {
+  margin-bottom: 16px;
+}
+
+.paragraph {
+  margin-bottom: 10px;
+}
+
+.paragraph:last-child {
+  margin-bottom: 0;
+}
