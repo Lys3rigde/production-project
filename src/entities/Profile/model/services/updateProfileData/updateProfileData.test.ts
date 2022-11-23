@@ -13,6 +13,7 @@ const data = {
   city: 'saf',
   currency: Currency.RUB,
   avatar: 'https://www.w3schools.com/howto/img_avatar.png',
+  id: '1',
 };
 
 describe('updateProfileData', () => {

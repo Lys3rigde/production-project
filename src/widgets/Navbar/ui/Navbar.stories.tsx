@@ -26,7 +26,7 @@ DarkWithAuth.decorators = [ThemeDecorator(Theme.DARK), StoreDecorator({
   user: {
     authData: {
       username: '213',
-      id: 2,
+      id: '2',
     },
   },
 })];
