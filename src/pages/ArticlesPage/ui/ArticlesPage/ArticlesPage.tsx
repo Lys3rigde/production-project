@@ -6,13 +6,10 @@ import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
 import { useInitialEffect } from 'shared/lib/hooks/useInitialEffect';
 import { useSelector } from 'react-redux';
 import { Page } from 'shared/ui/Page/Page';
-import { fetchNextArticlesPage } from 'pages/ArticlesPage/model/services/fetchNextArticlesPage/fetchNextArticlesPage';
+import { fetchNextArticlesPage } from '../../model/services/fetchNextArticlesPage/fetchNextArticlesPage';
+import { initArticlesPage } from '../../model/services/initArticlesPage/initArticlesPage';
 import { articlesPageActions, articlesPageReducer, getArticles } from '../../model/slice/artcliesPageSlice';
-import {
-  getArticlesPageIsLoading,
-  getArticlesPageView,
-} from '../../model/selectors/articlePageSelectors';
-import { fetchArticlesList } from '../../model/services/fetchArticlesList/fetchArticlesList';
+import { getArticlesPageIsLoading, getArticlesPageView } from '../../model/selectors/articlePageSelectors';
 import styles from './ArticlesPage.module.scss';
 
 interface ArticlesPageProps {
@@ -26,16 +23,13 @@ const reducers: ReducersList = {
 const ArticlesPage = ({ className }: ArticlesPageProps) => {
   const dispatch = useAppDispatch();
 
-  useInitialEffect(() => {
-    dispatch(articlesPageActions.initState());
-    dispatch(fetchArticlesList({
-      page: 1,
-    }));
-  });
-
   const articles = useSelector(getArticles.selectAll);
   const isLoading = useSelector(getArticlesPageIsLoading);
   const view = useSelector(getArticlesPageView);
+
+  useInitialEffect(() => {
+    dispatch(initArticlesPage());
+  });
 
   const handleLoadNextPart = useCallback(() => {
     dispatch(fetchNextArticlesPage());
@@ -46,7 +40,7 @@ const ArticlesPage = ({ className }: ArticlesPageProps) => {
   }, [dispatch]);
 
   return (
-    <DynamicModuleLoader reducers={reducers} removeAfterUnmount>
+    <DynamicModuleLoader reducers={reducers} removeAfterUnmount={false}>
       <Page onScrollEnd={handleLoadNextPart} className={classNames(styles.ArticlesPage, {}, [className])}>
         <ArticleViewSelector view={view} handleViewClick={handleViewClick} />
         <ArticleList
