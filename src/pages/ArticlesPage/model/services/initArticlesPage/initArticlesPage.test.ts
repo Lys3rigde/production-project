@@ -12,10 +12,10 @@ describe('initArticlesPage', () => {
       },
     });
 
-    await thunk.callThunk();
+    await thunk.callThunk(new URLSearchParams());
 
     expect(thunk.dispatch).toBeCalledTimes(4);
-    expect(fetchArticlesList).toBeCalledWith({ page: 1 });
+    expect(fetchArticlesList).toBeCalledWith({});
   });
   test('inited', async () => {
     const thunk = new TestAsyncThunk(initArticlesPage, {
@@ -24,7 +24,7 @@ describe('initArticlesPage', () => {
       },
     });
 
-    await thunk.callThunk();
+    await thunk.callThunk(new URLSearchParams());
 
     expect(thunk.dispatch).toBeCalledTimes(2);
     expect(fetchArticlesList).not.toHaveBeenCalled();
