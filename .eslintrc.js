@@ -40,9 +40,10 @@ module.exports = {
     'no-undef': 'off',
     'no-unused-vars': 'off',
     '@typescript-eslint/no-unused-vars': 'warn',
+    'arrow-body-style': 'off',
     'i18next/no-literal-string': ['error', {
       markupOnly: true,
-      ignoreAttribute: ['data-testid', 'to'],
+      ignoreAttribute: ['data-testid', 'to', 'target'],
     }],
     'max-len': ['error', {
       ignoreComments: true,
