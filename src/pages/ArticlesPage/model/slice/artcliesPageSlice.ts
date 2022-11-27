@@ -71,7 +71,7 @@ const articlesPageSlice = createSlice({
       })
       .addCase(fetchArticlesList.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.hasMore = action.payload.length > state.limit;
+        state.hasMore = true;
 
         if (action.meta.arg.replace) {
           articlesAdapter.setAll(state, action.payload);

@@ -13,7 +13,7 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
-  plugins: ['react', '@typescript-eslint', 'i18next', 'react-hooks'],
+  plugins: ['react', '@typescript-eslint', 'i18next', 'react-hooks', 'nova-plugin'],
   rules: {
     'react/jsx-indent': [2, 2],
     indent: [2, 2],
@@ -39,6 +39,7 @@ module.exports = {
     'no-param-reassign': 'off',
     'no-undef': 'off',
     'no-unused-vars': 'off',
+    'nova-plugin/path-checker': 'error',
     '@typescript-eslint/no-unused-vars': 'warn',
     'arrow-body-style': 'off',
     'i18next/no-literal-string': ['error', {
