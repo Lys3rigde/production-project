@@ -9,7 +9,7 @@ import {
 import { useCallback } from 'react';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
 import { getUserAuthData } from 'entities/User';
-import styles from './ProfilePageHeader.module.scss';
+import { HStack } from 'shared/ui/Stack/HStack/HStack';
 
 interface ProfilePageHeaderProps {
   className?: string;
@@ -38,26 +38,25 @@ export const ProfilePageHeader = ({ className }: ProfilePageHeaderProps) => {
   const canEdit = authData?.id === profileData?.id;
 
   return (
-    <div className={classNames(styles.ProfilePageHeader, {}, [className])}>
+    <HStack max justify="between" className={classNames('', {}, [className])}>
       <Text title={t('Профиль')} />
       {canEdit && (
-        <div className={styles.btnWrapper}>
+        <div>
           {readonly ? (
-            <Button onClick={handleEdit} className={styles.button}>{t('Редактировать')}</Button>
+            <Button onClick={handleEdit}>{t('Редактировать')}</Button>
           ) : (
-            <div>
+            <HStack gap="8">
               <Button
                 onClick={handleCancelEdit}
-                className={styles.button}
                 theme={ButtonTheme.OUTLINE_RED}
               >
                 {t('Отменить')}
               </Button>
-              <Button onClick={handleSave} className={styles.button}>{t('Сохранить')}</Button>
-            </div>
+              <Button onClick={handleSave}>{t('Сохранить')}</Button>
+            </HStack>
           )}
         </div>
       )}
-    </div>
+    </HStack>
   );
 };

@@ -21,6 +21,7 @@ import { useTranslation } from 'react-i18next';
 import { useInitialEffect } from 'shared/lib/hooks/useInitialEffect';
 import { useParams } from 'react-router-dom';
 import { Page } from 'widgets/Page';
+import { VStack } from 'shared/ui/Stack/VStack/VStack';
 import { ProfilePageHeader } from './ProfilePageHeader/ProfilePageHeader';
 
 interface ProfilePageProps {
@@ -93,28 +94,30 @@ const ProfilePage = ({ className }: ProfilePageProps) => {
   return (
     <DynamicModuleLoader reducers={initialReducers} removeAfterUnmount>
       <Page className={classNames('', {}, [className])}>
-        <ProfilePageHeader />
-        {validateErrors.length ? validateErrors.map((err) => (
-          <Text
-            key={err}
-            theme={TextTheme.ERROR}
-            text={validateErrorsTranslates[err]}
+        <VStack max gap="16">
+          <ProfilePageHeader />
+          {validateErrors.length ? validateErrors.map((err) => (
+            <Text
+              key={err}
+              theme={TextTheme.ERROR}
+              text={validateErrorsTranslates[err]}
+            />
+          )) : null}
+          <ProfileCard
+            handleChangeUsername={handleChangeUsername}
+            handleChangeAvatar={handleChangeAvatar}
+            handleChangeAge={handleChangeAge}
+            handleChangeCity={handleChangeCity}
+            readOnly={readOnly}
+            handleChangeLastname={handleChangeLastname}
+            handleChangeCurrency={handleChangeCurrency}
+            handleChangeFirstname={handleChangeFirstname}
+            handleChangeCountry={handleChangeCountry}
+            data={formData}
+            isLoading={isLoading}
+            error={error}
           />
-        )) : null}
-        <ProfileCard
-          handleChangeUsername={handleChangeUsername}
-          handleChangeAvatar={handleChangeAvatar}
-          handleChangeAge={handleChangeAge}
-          handleChangeCity={handleChangeCity}
-          readOnly={readOnly}
-          handleChangeLastname={handleChangeLastname}
-          handleChangeCurrency={handleChangeCurrency}
-          handleChangeFirstname={handleChangeFirstname}
-          handleChangeCountry={handleChangeCountry}
-          data={formData}
-          isLoading={isLoading}
-          error={error}
-        />
+        </VStack>
       </Page>
     </DynamicModuleLoader>
   );

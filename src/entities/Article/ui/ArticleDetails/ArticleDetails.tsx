@@ -10,6 +10,7 @@ import { Avatar } from 'shared/ui/Avatar/Avatar';
 import EyeIcon from 'shared/assets/icons/Eye.svg';
 import CalendarIcon from 'shared/assets/icons/Calendar.svg';
 import { Icon } from 'shared/ui/Icon/Icon';
+import { HStack, VStack } from 'shared/ui/Stack';
 import { ArticleCodeBlockComponent } from '../ArticleCodeBlockComponent/ArticleCodeBlockComponent';
 import { ArticleTextBlockComponent } from '../ArticleTextBlockComponent/ArticleTextBlockComponent';
 import { ArticleImageBlockComponent } from '../ArticleImageBlockComponent/ArticleImageBlockComponent';
@@ -80,32 +81,34 @@ export const ArticleDetails = memo(({ className, id }: ArticleDetailsProps) => {
   } else {
     content = (
       <>
-        <div className={styles.avatarWrapper}>
+        <HStack justify="center" className={styles.avatarWrapper}>
           <Avatar size={200} src={article?.img} className={styles.avatar} />
-        </div>
-        <Text
-          title={article?.title}
-          text={article?.subtitle}
-          size={TextSize.L}
-        />
-        <div className={styles.articleInfo}>
-          <Icon Svg={EyeIcon} />
-          <Text text={article?.views.toString()} />
-        </div>
-        <div className={styles.articleInfo}>
-          <Icon Svg={CalendarIcon} />
-          <Text text={article?.createdAt} />
-        </div>
-        {article?.blocks.map(renderBlock)}
+        </HStack>
+        <VStack gap="4" max>
+          <Text
+            title={article?.title}
+            text={article?.subtitle}
+            size={TextSize.L}
+          />
+          <HStack gap="8" className={styles.articleInfo}>
+            <Icon Svg={EyeIcon} />
+            <Text text={article?.views.toString()} />
+          </HStack>
+          <HStack gap="8" className={styles.articleInfo}>
+            <Icon Svg={CalendarIcon} />
+            <Text text={article?.createdAt} />
+          </HStack>
+          {article?.blocks.map(renderBlock)}
+        </VStack>
       </>
     );
   }
 
   return (
     <DynamicModuleLoader reducers={reducers} removeAfterUnmount>
-      <div className={classNames(styles.ArticleDetails, {}, [className])}>
+      <VStack gap="16" className={classNames(styles.ArticleDetails, {}, [className])}>
         {content}
-      </div>
+      </VStack>
     </DynamicModuleLoader>
   );
 });
