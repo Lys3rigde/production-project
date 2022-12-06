@@ -1,15 +1,13 @@
 import { memo, useCallback } from 'react';
-import { ArticleList } from 'entities/Article';
 import { DynamicModuleLoader, ReducersList } from 'shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
-import { useInitialEffect } from 'shared/lib/hooks/useInitialEffect';
-import { useSelector } from 'react-redux';
 import { Page } from 'widgets/Page';
+import { useInitialEffect } from 'shared/lib/hooks/useInitialEffect';
 import { useSearchParams } from 'react-router-dom';
-import { fetchNextArticlesPage } from '../../model/services/fetchNextArticlesPage/fetchNextArticlesPage';
+import { ArticleInfiniteList } from '../ArticleInfiniteList/ArticleInfiniteList';
 import { initArticlesPage } from '../../model/services/initArticlesPage/initArticlesPage';
-import { articlesPageReducer, getArticles } from '../../model/slice/artcliesPageSlice';
-import { getArticlesPageIsLoading, getArticlesPageView } from '../../model/selectors/articlePageSelectors';
+import { fetchNextArticlesPage } from '../../model/services/fetchNextArticlesPage/fetchNextArticlesPage';
+import { articlesPageReducer } from '../../model/slice/artcliesPageSlice';
 import styles from './ArticlesPage.module.scss';
 import { ArticlesPageFilters } from '../ArticlesPageFilters/ArticlesPageFilters';
 
@@ -23,30 +21,21 @@ const reducers: ReducersList = {
 
 const ArticlesPage = ({ className }: ArticlesPageProps) => {
   const [searchParams] = useSearchParams();
-
   const dispatch = useAppDispatch();
-
-  const articles = useSelector(getArticles.selectAll);
-  const isLoading = useSelector(getArticlesPageIsLoading);
-  const view = useSelector(getArticlesPageView);
-
-  useInitialEffect(() => {
-    dispatch(initArticlesPage(searchParams));
-  });
 
   const handleLoadNextPart = useCallback(() => {
     dispatch(fetchNextArticlesPage());
   }, [dispatch]);
 
+  useInitialEffect(() => {
+    dispatch(initArticlesPage(searchParams));
+  });
+
   return (
     <DynamicModuleLoader reducers={reducers} removeAfterUnmount={false}>
       <Page onScrollEnd={handleLoadNextPart}>
         <ArticlesPageFilters className={styles.filters} />
-        <ArticleList
-          isLoading={isLoading}
-          view={view}
-          articles={articles}
-        />
+        <ArticleInfiniteList />
       </Page>
     </DynamicModuleLoader>
   );

@@ -15,6 +15,7 @@ interface ArticleListProps {
 	isLoading?: boolean
 	view?: ArticleView
   target?: HTMLAttributeAnchorTarget
+  virtualized?: boolean
 }
 
 export const ArticleList = memo((props: ArticleListProps) => {
@@ -24,6 +25,7 @@ export const ArticleList = memo((props: ArticleListProps) => {
     articles,
     target,
     isLoading,
+    virtualized = true,
   } = props;
 
   const { t } = useTranslation('article');
@@ -34,7 +36,7 @@ export const ArticleList = memo((props: ArticleListProps) => {
   const rowsCount = isList ? articles.length : Math.ceil(articles.length / itemsPerRow);
 
   const rowRender = ({
-    index, isScrolling, key, style,
+    index, key, style,
   }: ListRowProps) => {
     const items = [];
     const fromIndex = index * itemsPerRow;
@@ -87,17 +89,23 @@ export const ArticleList = memo((props: ArticleListProps) => {
           ref={registerChild}
           className={classNames(styles.ArticleList, {}, [className, styles[view]])}
         >
-          <List
-            autoHeight
-            height={height}
-            rowCount={rowsCount}
-            rowHeight={isList ? 700 : 330}
-            rowRenderer={rowRender}
-            width={width ? width - 80 : 700}
-            onScroll={onChildScroll}
-            isScrolling={isScrolling}
-            scrollTop={scrollTop}
-          />
+          {virtualized ? (
+            <List
+              autoHeight
+              height={height}
+              rowCount={rowsCount}
+              rowHeight={isList ? 700 : 330}
+              rowRenderer={rowRender}
+              width={width ? width - 80 : 700}
+              onScroll={onChildScroll}
+              isScrolling={isScrolling}
+              scrollTop={scrollTop}
+            />
+          ) : (
+            articles.map((item) => (
+              <ArticleListItem article={item} view={view} target={target} key={item.id} className={styles.card} />
+            ))
+          )}
           {isLoading && new Array(view === ArticleView.GRID ? 9 : 3).fill(0).map((item, index) => (
             // eslint-disable-next-line react/no-array-index-key
             <ArticleListItemSkeleton key={index} view={view} />
