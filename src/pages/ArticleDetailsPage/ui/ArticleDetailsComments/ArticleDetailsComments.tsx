@@ -6,6 +6,7 @@ import { AddCommentForm } from 'features/addCommentForm';
 import { CommentList } from 'entities/Comment';
 import { useDispatch, useSelector } from 'react-redux';
 import { useInitialEffect } from 'shared/lib/hooks/useInitialEffect';
+import { VStack } from 'shared/ui/Stack';
 import {
   fetchCommentsByArticleId,
 } from '../../model/services/fetchCommentsByArticleId/fetchCommentsByArticleId';
@@ -34,7 +35,7 @@ export const ArticleDetailsComments = memo(({ className, id }: ArticleDetailsCom
   }, [dispatch]);
 
   return (
-    <div className={classNames('', {}, [className])}>
+    <VStack max className={classNames('', {}, [className])}>
       <Text size={TextSize.L} title={t('Комментарии')} />
       <AddCommentForm
         handleSendComment={handleSendComment}
@@ -43,6 +44,6 @@ export const ArticleDetailsComments = memo(({ className, id }: ArticleDetailsCom
         isLoading={commentsIsLoading}
         comments={comments}
       />
-    </div>
+    </VStack>
   );
 });
