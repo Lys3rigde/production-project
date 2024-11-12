@@ -1,29 +1,28 @@
-import { StateSchema } from 'app/providers/StoreProvider';
-import { Country } from 'entities/Country';
-import { Currency } from 'entities/Currency';
+import { StateSchema } from '@/app/providers/StoreProvider';
+import { Country } from '@/entities/Country';
+import { Currency } from '@/entities/Currency';
 import { getProfileForm } from './getProfileForm';
 
-describe('getProfileForm', () => {
-  test('should return formData', () => {
-    const form = {
+describe('getProfileForm.test', () => {
+  test('should return error', () => {
+    const data = {
       username: 'admin',
       age: 22,
-      country: Country.UA,
-      lastname: 'user',
-      firstname: 'user',
-      city: 'saf',
-      currency: Currency.RUB,
-      avatar: 'https://www.w3schools.com/howto/img_avatar.png',
+      country: Country.Ukraine,
+      lastname: 'ulbi tv',
+      first: 'asd',
+      city: 'asf',
+      currency: Currency.USD,
     };
     const state: DeepPartial<StateSchema> = {
       profile: {
-        form,
+        form: data,
       },
     };
-    expect(getProfileForm(state as StateSchema)).toEqual(form);
+    expect(getProfileForm(state as StateSchema)).toEqual(data);
   });
   test('should work with empty state', () => {
     const state: DeepPartial<StateSchema> = {};
-    expect(getProfileForm(state as StateSchema)).toBe(undefined);
+    expect(getProfileForm(state as StateSchema)).toEqual(undefined);
   });
 });

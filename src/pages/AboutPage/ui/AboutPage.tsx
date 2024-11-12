@@ -1,8 +1,8 @@
-import React, { memo } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Page } from 'widgets/Page';
+import { Page } from '@/widgets/Page/Page';
 
-export const AboutPage = memo(() => {
+const AboutPage = () => {
   const { t } = useTranslation('about');
 
   return (
@@ -10,6 +10,6 @@ export const AboutPage = memo(() => {
       {t('О сайте')}
     </Page>
   );
-});
+};
 
 export default AboutPage;

@@ -1,5 +1,6 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
+
 import { CommentList } from './CommentList';
 
 export default {
@@ -17,30 +18,13 @@ Normal.args = {
   comments: [
     {
       id: '1',
-      text: 'comment 1',
-      user: {
-        id: '1',
-        username: 'Tolik',
-        avatar: 'https://www.w3schools.com/howto/img_avatar.png',
-      },
+      text: 'hello world',
+      user: { id: '1', username: 'Vasya' },
     },
     {
       id: '2',
-      text: 'comment 2',
-      user: {
-        id: '1',
-        username: 'Tolik',
-        avatar: 'https://www.w3schools.com/howto/img_avatar.png',
-      },
-    },
-    {
-      id: '3',
-      text: 'comment 3',
-      user: {
-        id: '1',
-        username: 'Tolik',
-        avatar: 'https://www.w3schools.com/howto/img_avatar.png',
-      },
+      text: 'Comment 2',
+      user: { id: '1', username: 'Petya' },
     },
   ],
 };

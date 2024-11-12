@@ -1,41 +1,42 @@
-import { memo, useCallback } from 'react';
-import { classNames } from 'shared/lib/classNames/classNames';
 import { useTranslation } from 'react-i18next';
+import { memo, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { RoutePath } from 'shared/config/routeConfig/routeConfig';
-import Button from 'shared/ui/Button/Button';
 import { useSelector } from 'react-redux';
-import { getArticleDetailsData } from 'entities/Article';
-import { HStack } from 'shared/ui/Stack';
-import { canUserEditArticle } from '../../model/selectors/article';
+import { RoutePath } from '@/shared/config/routeConfig/routeConfig';
+import { Button, ButtonTheme } from '@/shared/ui/Button/Button';
+import { classNames } from '@/shared/lib/classNames/classNames';
+import { getArticleDetailsData } from '@/entities/Article/model/selectors/articleDetails';
+import { HStack } from '@/shared/ui/Stack';
+import { getCanEditArticle } from '../../model/selectors/article';
 
 interface ArticleDetailsPageHeaderProps {
-	className?: string;
+    className?: string;
 }
 
-export const ArticleDetailsPageHeader = memo(({ className }: ArticleDetailsPageHeaderProps) => {
-  const { t } = useTranslation('article');
-
+export const ArticleDetailsPageHeader = memo((props: ArticleDetailsPageHeaderProps) => {
+  const { className } = props;
+  const { t } = useTranslation();
   const navigate = useNavigate();
-  const isEditable = useSelector(canUserEditArticle);
+  const canEdit = useSelector(getCanEditArticle);
   const article = useSelector(getArticleDetailsData);
 
-  const handleBackToList = useCallback(() => {
+  const onBackToList = useCallback(() => {
     navigate(RoutePath.articles);
   }, [navigate]);
 
-  const handleEditArticle = useCallback(() => {
+  const onEditArticle = useCallback(() => {
     navigate(`${RoutePath.article_details}${article?.id}/edit`);
   }, [article?.id, navigate]);
 
   return (
     <HStack max justify="between" className={classNames('', {}, [className])}>
-      <Button onClick={handleBackToList}>
+      <Button theme={ButtonTheme.OUTLINE} onClick={onBackToList}>
         {t('Назад к списку')}
       </Button>
-      {isEditable && (
+      {canEdit && (
         <Button
-          onClick={handleEditArticle}
+          theme={ButtonTheme.OUTLINE}
+          onClick={onEditArticle}
         >
           {t('Редактировать')}
         </Button>

@@ -8,11 +8,11 @@
 
 .error {
   .title {
-    color: var(--red-dark);
+    color: var(--red-light);
   }
 
   .text {
-    color: var(--red-light);
+    color: var(--red-dark);
   }
 }
 
@@ -30,12 +30,22 @@
   text-align: left;
 }
 
+.right {
+  text-align: right;
+}
+
 .center {
   text-align: center;
 }
 
-.right {
-  text-align: right;
+.size_s {
+  .title {
+    font: var(--font-m);
+  }
+
+  .text {
+    font: var(--font-s);
+  }
 }
 
 .size_m {
@@ -50,20 +60,10 @@
 
 .size_l {
   .title {
+    font: var(--font-xl);
+  }
+
+  .text {
     font: var(--font-l);
-  }
-
-  .text {
-    font: var(--font-m);
-  }
-}
-
-.size_s {
-  .title {
-    font: var(--font-m);
-  }
-
-  .text {
-    font: var(--font-s);
   }
 }

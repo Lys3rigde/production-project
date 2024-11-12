@@ -1,35 +1,30 @@
 import { memo } from 'react';
-import { classNames } from 'shared/lib/classNames/classNames';
-import { Text } from 'shared/ui/Text/Text';
-import { Icon } from 'shared/ui/Icon/Icon';
-import EyeIcon from 'shared/assets/icons/Eye.svg';
-import { Card } from 'shared/ui/Card/Card';
-import { Avatar } from 'shared/ui/Avatar/Avatar';
-import Button from 'shared/ui/Button/Button';
-import { Skeleton } from 'shared/ui/Skeleton/Skeleton';
-import { ArticleTextBlockComponent } from '../ArticleTextBlockComponent/ArticleTextBlockComponent';
-import { ArticleView } from '../../model/types/article';
-import styles from './ArticleListItem.module.scss';
+import { classNames } from '@/shared/lib/classNames/classNames';
+import { Card } from '@/shared/ui/Card/Card';
+import { Skeleton } from '@/shared/ui/Skeleton/Skeleton';
+import { ArticleView } from '../../model/consts/articleConsts';
+import cls from './ArticleListItem.module.scss';
 
 interface ArticleListItemSkeletonProps {
-	className?: string;
-	view: ArticleView
+    className?: string;
+    view: ArticleView;
 }
 
-export const ArticleListItemSkeleton = memo(({ className, view }: ArticleListItemSkeletonProps) => {
-  if (view === ArticleView.LIST) {
+export const ArticleListItemSkeleton = memo((props: ArticleListItemSkeletonProps) => {
+  const { className, view } = props;
+
+  if (view === ArticleView.BIG) {
     return (
-      <div className={classNames(styles.ArticleListItem, {}, [className, styles[view]])}>
-        <Card className={styles.card}>
-          <div className={styles.header}>
-            <Skeleton width={30} height={30} borderRadius="50%" />
-            <Skeleton width={150} height={24} className={styles.username} />
-            <Skeleton width={150} height={24} className={styles.date} />
+      <div className={classNames(cls.ArticleListItem, {}, [className, cls[view]])}>
+        <Card className={cls.card}>
+          <div className={cls.header}>
+            <Skeleton border="50%" height={30} width={30} />
+            <Skeleton width={150} height={16} className={cls.username} />
+            <Skeleton width={150} height={16} className={cls.date} />
           </div>
-          <Skeleton width={250} height={32} className={styles.title} />
-          <Skeleton width="100%" height={200} className={styles.img} />
-          <Skeleton width="100%" height={300} className={styles.textBlock} />
-          <div className={styles.footer}>
+          <Skeleton width={250} height={24} className={cls.title} />
+          <Skeleton height={200} className={cls.img} />
+          <div className={cls.footer}>
             <Skeleton height={36} width={200} />
           </div>
         </Card>
@@ -38,15 +33,15 @@ export const ArticleListItemSkeleton = memo(({ className, view }: ArticleListIte
   }
 
   return (
-    <div className={classNames(styles.ArticleListItem, {}, [className, styles[view]])}>
-      <Card>
-        <div className={styles.imageWrapper}>
-          <Skeleton width={200} height={200} className={styles.img} />
+    <div className={classNames(cls.ArticleListItem, {}, [className, cls[view]])}>
+      <Card className={cls.card}>
+        <div className={cls.imageWrapper}>
+          <Skeleton width={200} height={200} className={cls.img} />
         </div>
-        <div className={styles.infoWrapper}>
-          <Skeleton width={130} height={24} />
+        <div className={cls.infoWrapper}>
+          <Skeleton width={130} height={16} />
         </div>
-        <Skeleton width={180} height={24} />
+        <Skeleton width={150} height={16} className={cls.title} />
       </Card>
     </div>
   );

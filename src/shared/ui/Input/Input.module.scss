@@ -2,6 +2,10 @@
   display: flex;
 }
 
+.placeholder {
+  margin-right: 5px;
+}
+
 .input {
   background: transparent;
   border: none;
@@ -15,8 +19,9 @@
   }
 }
 
-.placeholder {
-  margin-right: 5px;
+.caretWrapper {
+  flex-grow: 1;
+  position: relative;
 }
 
 .caret {
@@ -26,17 +31,11 @@
   bottom: 0;
   left: 0;
   position: absolute;
-  animation: blink 0.83s forwards infinite;
+  animation: blink 0.7s forwards infinite;
 }
 
-.caretWrapper {
-  flex-grow: 1;
-  position: relative;
-}
-
-.readOnly {
-  opacity: 0.75;
-  cursor: default;
+.readonly {
+  opacity: 0.7;
 }
 
 @keyframes blink {

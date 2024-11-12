@@ -1,7 +1,15 @@
 .CommentCard {
-  padding: 15px;
+  padding: 10px;
   border: 1px solid var(--primary-color);
-  border-radius: 10px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+}
+
+.username {
+  margin-left: 10px;
 }
 
 .loading {

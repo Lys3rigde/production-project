@@ -1,53 +1,73 @@
-import { classNames } from 'shared/lib/classNames/classNames';
 import { useTranslation } from 'react-i18next';
-import { DynamicModuleLoader, ReducersList } from 'shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
 import { memo, useCallback, useEffect } from 'react';
-import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
 import { useSelector } from 'react-redux';
-import { Text, TextAlign, TextSize } from 'shared/ui/Text/Text';
-import { Skeleton } from 'shared/ui/Skeleton/Skeleton';
-import { Avatar } from 'shared/ui/Avatar/Avatar';
-import EyeIcon from 'shared/assets/icons/Eye.svg';
-import CalendarIcon from 'shared/assets/icons/Calendar.svg';
-import { Icon } from 'shared/ui/Icon/Icon';
-import { HStack, VStack } from 'shared/ui/Stack';
+import { DynamicModuleLoader, ReducersList } from '@/shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
+import { classNames } from '@/shared/lib/classNames/classNames';
+import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
+import { Text, TextAlign, TextSize } from '@/shared/ui/Text/Text';
+import { Skeleton } from '@/shared/ui/Skeleton/Skeleton';
+import { Avatar } from '@/shared/ui/Avatar/Avatar';
+import EyeIcon from '@/shared/assets/icons/eye-20-20.svg';
+import CalendarIcon from '@/shared/assets/icons/calendar-20-20.svg';
+import { Icon } from '@/shared/ui/Icon/Icon';
+import { HStack, VStack } from '@/shared/ui/Stack';
+import { ArticleBlockType } from '../../model/consts/articleConsts';
 import { ArticleCodeBlockComponent } from '../ArticleCodeBlockComponent/ArticleCodeBlockComponent';
-import { ArticleTextBlockComponent } from '../ArticleTextBlockComponent/ArticleTextBlockComponent';
 import { ArticleImageBlockComponent } from '../ArticleImageBlockComponent/ArticleImageBlockComponent';
-import { ArticleBlock, ArticleBlockType } from '../../model/types/article';
+import { ArticleTextBlockComponent } from '../ArticleTextBlockComponent/ArticleTextBlockComponent';
+import { fetchArticleById } from '../../model/services/fetchArticleById/fetchArticleById';
+import { articleDetailsReducer } from '../../model/slice/articleDetailsSlice';
+import cls from './ArticleDetails.module.scss';
 import {
   getArticleDetailsData,
   getArticleDetailsError,
   getArticleDetailsIsLoading,
-} from '../../model/selectors/getArticleDetais';
-import { fetchArticleById } from '../../model/services/fetchArticleById/fetchArticleById';
-import { articleDetailsReducer } from '../../model/slice/articleDetailsSlice';
-import styles from './ArticleDetails.module.scss';
+} from '../../model/selectors/articleDetails';
+import { ArticleBlock } from '../../model/types/article';
 
 interface ArticleDetailsProps {
-	className?: string;
-  id: string
+    className?: string;
+    id?: string;
 }
 
 const reducers: ReducersList = {
   articleDetails: articleDetailsReducer,
 };
 
-export const ArticleDetails = memo(({ className, id }: ArticleDetailsProps) => {
+export const ArticleDetails = memo((props: ArticleDetailsProps) => {
+  const { className, id } = props;
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  const article = useSelector(getArticleDetailsData);
   const isLoading = useSelector(getArticleDetailsIsLoading);
+  const article = useSelector(getArticleDetailsData);
   const error = useSelector(getArticleDetailsError);
 
   const renderBlock = useCallback((block: ArticleBlock) => {
     switch (block.type) {
     case ArticleBlockType.CODE:
-      return <ArticleCodeBlockComponent key={block.id} className={styles.block} block={block} />;
-    case ArticleBlockType.TEXT:
-      return <ArticleTextBlockComponent key={block.id} className={styles.block} block={block} />;
+      return (
+        <ArticleCodeBlockComponent
+          key={block.id}
+          block={block}
+          className={cls.block}
+        />
+      );
     case ArticleBlockType.IMAGE:
-      return <ArticleImageBlockComponent key={block.id} className={styles.block} block={block} />;
+      return (
+        <ArticleImageBlockComponent
+          key={block.id}
+          block={block}
+          className={cls.block}
+        />
+      );
+    case ArticleBlockType.TEXT:
+      return (
+        <ArticleTextBlockComponent
+          key={block.id}
+          className={cls.block}
+          block={block}
+        />
+      );
     default:
       return null;
     }
@@ -64,49 +84,54 @@ export const ArticleDetails = memo(({ className, id }: ArticleDetailsProps) => {
   if (isLoading) {
     content = (
       <>
-        <Skeleton className={styles.avatar} width={200} height={200} borderRadius="50%" />
-        <Skeleton className={styles.title} width={300} height={32} borderRadius={4} />
-        <Skeleton className={styles.skeleton} width={600} height={32} borderRadius={4} />
-        <Skeleton className={styles.skeleton} width="100%" height={240} borderRadius={10} />
-        <Skeleton className={styles.skeleton} width="100%" height={240} borderRadius={10} />
+        <Skeleton className={cls.avatar} width={200} height={200} border="50%" />
+        <Skeleton className={cls.title} width={300} height={32} />
+        <Skeleton className={cls.skeleton} width={600} height={24} />
+        <Skeleton className={cls.skeleton} width="100%" height={200} />
+        <Skeleton className={cls.skeleton} width="100%" height={200} />
       </>
     );
   } else if (error) {
     content = (
       <Text
         align={TextAlign.CENTER}
-        title={t('Произошла ошибка при загрузке статьи')}
+        title={t('Произошла ошибка при загрузке статьи.')}
       />
     );
   } else {
     content = (
       <>
-        <HStack justify="center" className={styles.avatarWrapper}>
-          <Avatar size={200} src={article?.img} className={styles.avatar} />
+        <HStack justify="center" max className={cls.avatarWrapper}>
+          <Avatar
+            size={200}
+            src={article?.img}
+            className={cls.avatar}
+          />
         </HStack>
         <VStack gap="4" max>
           <Text
+            className={cls.title}
             title={article?.title}
             text={article?.subtitle}
             size={TextSize.L}
           />
-          <HStack gap="8" className={styles.articleInfo}>
-            <Icon Svg={EyeIcon} />
-            <Text text={article?.views.toString()} />
+          <HStack gap="8" className={cls.articleInfo}>
+            <Icon className={cls.icon} Svg={EyeIcon} />
+            <Text text={String(article?.views)} />
           </HStack>
-          <HStack gap="8" className={styles.articleInfo}>
-            <Icon Svg={CalendarIcon} />
+          <HStack gap="8" className={cls.articleInfo}>
+            <Icon className={cls.icon} Svg={CalendarIcon} />
             <Text text={article?.createdAt} />
           </HStack>
-          {article?.blocks.map(renderBlock)}
         </VStack>
+        {article?.blocks.map(renderBlock)}
       </>
     );
   }
 
   return (
     <DynamicModuleLoader reducers={reducers} removeAfterUnmount>
-      <VStack gap="16" max className={classNames(styles.ArticleDetails, {}, [className])}>
+      <VStack gap="16" max className={classNames(cls.ArticleDetails, {}, [className])}>
         {content}
       </VStack>
     </DynamicModuleLoader>

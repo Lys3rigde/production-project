@@ -1,10 +1,12 @@
-import { classNames } from 'shared/lib/classNames/classNames';
 import { useTranslation } from 'react-i18next';
 import { memo } from 'react';
-import { Text, TextSize } from 'shared/ui/Text/Text';
-import { ArticleList, ArticleView } from 'entities/Article';
-import { VStack } from 'shared/ui/Stack';
-import { useArticleRecommendationsList } from '../../api/articleRecommendationsApi';
+import { classNames } from '@/shared/lib/classNames/classNames';
+import { Text, TextSize } from '@/shared/ui/Text/Text';
+import { ArticleList } from '@/entities/Article';
+import { VStack } from '@/shared/ui/Stack';
+import {
+  useArticleRecommendationsList,
+} from '../../api/aritcleRecommendationsApi';
 
 interface ArticleRecommendationsListProps {
     className?: string;
@@ -21,12 +23,13 @@ export const ArticleRecommendationsList = memo((props: ArticleRecommendationsLis
 
   return (
     <VStack gap="8" className={classNames('', {}, [className])}>
-      <Text size={TextSize.L} title={t('Рекомендуем')} />
+      <Text
+        size={TextSize.L}
+        title={t('Рекомендуем')}
+      />
       <ArticleList
-        virtualized={false}
-        target="_blank"
-        view={ArticleView.GRID}
         articles={articles}
+        target="_blank"
       />
     </VStack>
   );

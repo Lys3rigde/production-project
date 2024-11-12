@@ -1,10 +1,10 @@
 import React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { ThemeDecorator } from 'shared/config/storybook/ThemeDecorator/ThemeDecorator';
-import { Theme } from 'app/providers/ThemeProvider';
-import { StoreDecorator } from 'shared/config/storybook/StoreDecorator/StoreDecorator';
-import { Country } from 'entities/Country';
-import { Currency } from 'entities/Currency';
+import { ThemeDecorator } from '@/shared/config/storybook/ThemeDecorator/ThemeDecorator';
+import { Theme } from '@/app/providers/ThemeProvider';
+import { StoreDecorator } from '@/shared/config/storybook/StoreDecorator/StoreDecorator';
+import { Country } from '@/entities/Country';
+import { Currency } from '@/entities/Currency';
 import ProfilePage from './ProfilePage';
 
 export default {
@@ -12,9 +12,6 @@ export default {
   component: ProfilePage,
   argTypes: {
     backgroundColor: { control: 'color' },
-  },
-  args: {
-    to: '/',
   },
 } as ComponentMeta<typeof ProfilePage>;
 
@@ -27,15 +24,15 @@ Normal.decorators = [StoreDecorator({
     form: {
       username: 'admin',
       age: 22,
-      country: Country.UA,
-      lastname: 'user',
-      firstname: 'user',
-      city: 'saf',
-      currency: Currency.RUB,
-      avatar: 'https://www.w3schools.com/howto/img_avatar.png',
+      country: Country.Ukraine,
+      lastname: 'ulbi tv',
+      first: 'asd',
+      city: 'asf',
+      currency: Currency.USD,
     },
   },
 })];
+
 export const Dark = Template.bind({});
 Dark.args = {};
 Dark.decorators = [ThemeDecorator(Theme.DARK), StoreDecorator({
@@ -43,12 +40,11 @@ Dark.decorators = [ThemeDecorator(Theme.DARK), StoreDecorator({
     form: {
       username: 'admin',
       age: 22,
-      country: Country.UA,
-      lastname: 'user',
-      firstname: 'user',
-      city: 'saf',
-      currency: Currency.RUB,
-      avatar: 'https://www.w3schools.com/howto/img_avatar.png',
+      country: Country.Ukraine,
+      lastname: 'ulbi tv',
+      first: 'asd',
+      city: 'asf',
+      currency: Currency.USD,
     },
   },
 })];

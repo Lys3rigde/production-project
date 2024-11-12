@@ -6,6 +6,10 @@
   justify-content: flex-start;
 }
 
+.justifyCenter {
+  justify-content: center;
+}
+
 .justifyEnd {
   justify-content: flex-end;
 }
@@ -14,20 +18,16 @@
   justify-content: space-between;
 }
 
-.justifyCenter {
-  justify-content: center;
-}
-
-.alignEnd {
-  align-items: flex-end;
+.alignStart {
+  align-items: flex-start;
 }
 
 .alignCenter {
   align-items: center;
 }
 
-.alignStart {
-  align-items: flex-start;
+.alignEnd {
+  align-items: flex-end;
 }
 
 .directionRow {
@@ -50,8 +50,8 @@
   gap: 16px;
 }
 
-.gap30 {
-  gap: 30px;
+.gap32 {
+  gap: 32px;
 }
 
 .max {
